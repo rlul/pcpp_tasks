@@ -9,38 +9,39 @@
 
 namespace HR
 {
-    struct Employee {
-        char firstInitial;
-        char lastInitial;
-        int employeeNumber;
-        int salary;
-        enum
+    struct Employee
+	{
+        enum class title_t
         {
             Manager = 0,
             SeniorEngineer,
             Engineer
-        } title;
+        };
+
+        char firstInitial;
+        char lastInitial;
+        int employeeNumber;
+        int salary;
+        title_t title;
     };
 }
-
-using namespace std;
 
 std::string GetTitleText(const HR::Employee&);
 
 int main()
 {
     HR::Employee anEmployee {
-        .firstInitial = 'J',
-            .lastInitial = 'D',
-            .employeeNumber = 42,
-            .salary = 80000,
-            .title = HR::Employee::Manager
+    	.firstInitial = 'J',
+    	.lastInitial = 'D',
+    	.employeeNumber = 42,
+    	.salary = 80000,
+    	.title = HR::Employee::title_t::Manager
     };
 
-    cout << format("Employee: {}{}", anEmployee.firstInitial, anEmployee.lastInitial) << endl;
-    cout << format("Number: {}", anEmployee.employeeNumber) << endl;
-    cout << format("Salary: ${}", anEmployee.salary) << endl;
-    cout << format("Title: {}", GetTitleText(anEmployee)) << endl;
+    std::cout << std::format("Employee: {}{}", anEmployee.firstInitial, anEmployee.lastInitial) << std::endl;
+    std::cout << std::format("Number: {}", anEmployee.employeeNumber) << std::endl;
+    std::cout << std::format("Salary: ${}", anEmployee.salary) << std::endl;
+    std::cout << std::format("Title: {}", GetTitleText(anEmployee)) << std::endl;
 
     return 0;
 }
@@ -49,21 +50,21 @@ std::string GetTitleText(const HR::Employee& employee)
 {
     switch (employee.title)
     {
-    case HR::Employee::Manager:
-    {
-        return "Manager";
-    }
-    case HR::Employee::SeniorEngineer:
-    {
-        return "Senior Engineer";
-    }
-    case HR::Employee::Engineer:
-    {
-        return "Engineer";
-    }
-    default:
-    {
-        return "Unknown";
-    }
+	    case HR::Employee::title_t::Manager:
+	    {
+	        return "Manager";
+	    }
+	    case HR::Employee::title_t::SeniorEngineer:
+	    {
+	        return "Senior Engineer";
+	    }
+	    case HR::Employee::title_t::Engineer:
+	    {
+	        return "Engineer";
+	    }
+	    default:
+	    {
+	        return "Unknown";
+	    }
     }
 }

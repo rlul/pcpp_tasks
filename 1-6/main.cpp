@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <format>
+#include <optional>
 
 class AirlineTicket
 {
@@ -12,13 +13,8 @@ public:
     AirlineTicket()
         : m_passengerName{ "Unknown Passenger" },
         m_numberOfMiles{ 0 },
-        m_hasEliteSuperRewardsStatus{ false },
-        m_frequentFlierNumber(0)
+        m_hasEliteSuperRewardsStatus{ false }
     {
-    }
-    ~AirlineTicket()
-    {
-        // Nothing to do in terms of cleanup
     }
 
     double calculatePriceInDollars() const
@@ -32,8 +28,8 @@ public:
         return getNumberOfMiles() * 0.1;
     }
 
-    std::string getPassengerName() const { return m_passengerName; }
-    void setPassengerName(std::string name) { m_passengerName = name; }
+    const std::string& getPassengerName() const { return m_passengerName; }
+    void setPassengerName(const std::string& name) { m_passengerName = name; }
 
     int getNumberOfMiles() const { return m_numberOfMiles; }
     void setNumberOfMiles(int miles) { m_numberOfMiles = miles; }
@@ -41,15 +37,15 @@ public:
     bool hasEliteSuperRewardsStatus() const { return m_hasEliteSuperRewardsStatus; }
     void setHasEliteSuperRewardsStatus(bool status) { m_hasEliteSuperRewardsStatus = status; }
 
-    int getFrequentFlierNumber() const { return m_frequentFlierNumber; }
-
+    const std::optional<int>& getFrequentFlierNumber() const { return m_frequentFlierNumber; }
     void setFrequentFlierNumber(int number) { m_frequentFlierNumber = number; }
+    void clearFrequentFlierNumber() { m_frequentFlierNumber.reset(); }
 
 private:
     std::string m_passengerName;
     int m_numberOfMiles;
     bool m_hasEliteSuperRewardsStatus;
-    int m_frequentFlierNumber;
+    std::optional<int> m_frequentFlierNumber;
 };
 
 int main()
@@ -59,10 +55,15 @@ int main()
     myTicket.setPassengerName("Sherman T. Socketwrench");
     myTicket.setNumberOfMiles(700);
     myTicket.setFrequentFlierNumber(100);
+
     double cost{ myTicket.calculatePriceInDollars() };
+    const auto frequentFlierNumber{ myTicket.getFrequentFlierNumber() };
 
     std::cout << std::format("This ticket will cost ${}", cost) << std::endl;
-    std::cout << std::format("Frequent Flier Number: {}", myTicket.getFrequentFlierNumber()) << std::endl;
+    if (frequentFlierNumber.has_value())
+    {
+        std::cout << std::format("Frequent Flier Number: {}", frequentFlierNumber.value()) << std::endl;
+    }
 
     return 0;
 }

@@ -1,8 +1,19 @@
-*.exe
-*.lib
-*.dll
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-.vs/
+# Build results
 Release_*/
 Debug_*/
 Output/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Files built by Visual Studio
+*.exe
+*.lib
+*.dll

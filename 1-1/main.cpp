@@ -8,7 +8,8 @@
 
 namespace HR
 {
-    struct Employee {
+    struct Employee
+	{
         char firstInitial;
         char lastInitial;
         int employeeNumber;
@@ -16,20 +17,18 @@ namespace HR
     };
 }
 
-using namespace std;
-
 int main()
 {
     HR::Employee anEmployee {
-        .firstInitial = 'J',
-            .lastInitial = 'D',
-            .employeeNumber = 42,
-            .salary = 80000
+    	.firstInitial = 'J',
+    	.lastInitial = 'D',
+    	.employeeNumber = 42,
+    	.salary = 80000
     };
 
-    cout << format("Employee: {}{}", anEmployee.firstInitial, anEmployee.lastInitial) << endl;
-    cout << format("Number: {}", anEmployee.employeeNumber) << endl;
-    cout << format("Salary: ${}", anEmployee.salary) << endl;
+    std::cout << std::format("Employee: {}{}", anEmployee.firstInitial, anEmployee.lastInitial) << std::endl;
+    std::cout << std::format("Number: {}", anEmployee.employeeNumber) << std::endl;
+    std::cout << std::format("Salary: ${}", anEmployee.salary) << std::endl;
 
     return 0;
 }

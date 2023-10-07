@@ -14,10 +14,6 @@ public:
         m_hasEliteSuperRewardsStatus{ false }
     {
     }
-    ~AirlineTicket()
-    {
-        // Nothing to do in terms of cleanup
-    }
 
     double calculatePriceInDollars() const
     {
@@ -30,8 +26,8 @@ public:
         return getNumberOfMiles() * 0.1;
     }
 
-    std::string getPassengerName() const { return m_passengerName; }
-    void setPassengerName(std::string name) { m_passengerName = name; }
+    const std::string& getPassengerName() const { return m_passengerName; }
+    void setPassengerName(const std::string& name) { m_passengerName = name; }
 
     int getNumberOfMiles() const { return m_numberOfMiles; }
     void setNumberOfMiles(int miles) { m_numberOfMiles = miles; }
