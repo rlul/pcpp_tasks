@@ -8,14 +8,12 @@
 
 #include <format>
 #include <iostream>
-#include <string>
 #include <vector>
 
 
 int main(int argc, char** argv)
 {
 	std::vector<float> numbers;
-	std::string input_buffer;
 
 	while (true)
 	{
